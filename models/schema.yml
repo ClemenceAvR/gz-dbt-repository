@@ -1,0 +1,57 @@
+ # schema.yml
+
+ version: 2
+
+ sources:
+   - name: raw
+     schema: gz_raw_data
+     tables: 
+       - name: sales
+         identifier: raw_gz_sales
+         description: sales of Greenweez / we have on row per product_id found in each orders_id
+         columns:
+         - name: date_date
+           tests:
+            - not_null
+           description: date of purchase
+         - name: orders_id
+           description: identificator of each orders
+         - name: pdt_id
+           description: identificator of each products
+         - name: revenue
+           description: revenue of Greenweez made thanks to the orders
+         - name: quantity
+           description: quantity of products
+       - name: product
+         identifier: raw_gz_product
+         description: product of Greenweez / we have on row per product_id found with the purchase price
+         columns:
+         - name: products_id
+           description: products identificator
+           tests:
+            - not_null
+       - name: ship
+         identifier: raw_gz_ship
+         description: cost of Greenweez / we have on row per orders_id with all the cost in details
+         columns:
+         - name: orders_id
+           description: orders identificators
+           tests:
+             - not_null
+         - name: shipping_fee
+           description: fee of the shipping per order
+         - name: shipping_fee_1
+           description: same as shipping_fee
+         - name: logCost
+           description: cost of the logistical cost
+         - name: ship_cost
+           description: cost of the ship cost in the logcost
+         - name: ship
+           identifier : raw_gz_ship
+           description: ship of Greenweez / info de livraison
+           columns:
+           - name: orders_id
+             description: primary key
+             tests:
+              - unique
+              - not null 
